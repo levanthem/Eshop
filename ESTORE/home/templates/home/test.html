@@ -1,0 +1,11 @@
+<div>
+    <form action ="/home/test/" method="post">
+        
+        {% csrf_token %}
+
+        <input  type='submit' name='remove' value=' - '>
+        <input  type='text' name='product' value='5'>
+        <div class="text-center col btn btn-success">{{cart1}} in Cart</div>
+        <input  type='submit' name='add' value=' + '>
+    </form>
+</div>

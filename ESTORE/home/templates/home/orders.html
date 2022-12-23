@@ -1,0 +1,104 @@
+{% extends 'home/base.html' %}
+{% block content%}
+{% load cart %}
+{% load custom_filter %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>MultiShop - Online Shop Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="border rounded p-4 m-4">
+             <p class="display-4 pl-4 ml-4">Your Orders</p>
+             <hr>
+             <table class="table">
+                 <thead>
+                     <tr>
+                         <th>Sno.</th>
+                         <th>Image</th>
+                         <th>Product</th>
+                         <th>Date</th>
+                         <th>Price</th>
+                         <th>Quantity</th>
+                         <th>Total</th>
+                         <th>Status</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     
+                     {% for order in orders %}
+                     <tr>
+                         <td>{{forloop.counter}}</td>
+                         <td><img style="height: 80px;" class="rounded-circle" src="{{order.product.Img1.url}}" alt=""></td>
+                         <td>{{order.product.ProductCode}}</td>
+                         <td>{{order.date}}</td>
+                         <td>{{order.price|currency}}</td>
+                         <td>{{order.quantity}}</td>
+                         <td>{{order.quantity|multiply:order.price|currency}}</td>
+                         {% if order.status %}
+                         <td><small class="badge badge-success">Completed</small></td>
+                         {%else%}
+                         <td><small class="badge badge-warning">Pending</small></td>
+                         {% endif %}
+                     </tr>
+                          
+                     {% endfor %}
+                    
+                 </tbody>
+              
+                </table>
+             <tfoot> 
+               
+                <h1> Total price: {{total_price}}  </h1>
+             </tfoot>
+
+            </div>
+                            
+            <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" onclick="payment()">Proceed To Payment</button>
+            
+            </div>
+        </div>
+     </div>
+     
+
+    <!-- Template Javascript -->
+  <script src="js/main.js"></script>
+    <script>
+        function payment(){
+            window.location.href = "http://127.0.0.1:8000/home/payment/";
+        }
+    </script> 
+    
+</body>
+
+</html>
+
+{% endblock %}
+
+
+
+
